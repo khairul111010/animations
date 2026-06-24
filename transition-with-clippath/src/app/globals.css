@@ -1,0 +1,52 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition-new(root) {
+  z-index: 2;
+  animation: center-clip-reveal 1.2s cubic-bezier(0.76, 0, 0.24, 1) forwards;
+}
+
+@keyframes center-clip-reveal {
+  0% {
+    clip-path: inset(50% 50% 50% 50% round 2vw);
+    transform: scale(1.4);
+  }
+  100% {
+    clip-path: inset(0% 0% 0% 0% round 0vw);
+    transform: scale(1);
+  }
+}
